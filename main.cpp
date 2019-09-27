@@ -43,11 +43,28 @@ void invertir(int arr[], int tam)
     }
 }
 
-void invertirRecursivo(int arr[], int tam)
+void invertirRecursivo(int arr[], int tam, int i=0)
 {
+    if(tam<= i)
+    {
+      return;
+    }
+    else
+    {
+        int x;
+        x =arr[i];
+        arr[i] = arr[tam-1];
+        arr[tam-1]= x;
+        invertirRecursivo(&arr[i+1], tam-1);
+    }
+}
+void bubblesort(int arr[], int tam)
+{
+    int &a=arr[0];
+    int &b=arr[tam-1];
+    swap(a,b);
 
 }
-
 int main()
 {
     int x[5];
@@ -58,12 +75,15 @@ int main()
     /*
     imprimirArreglo(x,5);
     cout<< sumarArreglo(x,5)<< endl;
-
     cout <<sumarRecursivo(x,5)<<endl;
-    */
+
     invertir(x,5);
     imprimirArreglo(x,5);
+
+    invertirRecursivo(x,5);
+    */
+    bubblesort(x,5);
+
+    imprimirArreglo(x,5);
+
 }
-
-// EJERCICIOS, ORDENAR CON FUNCION SWAP; BURBUJA; INSERTION SORT; QUICKSORT
-
