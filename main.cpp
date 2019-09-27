@@ -60,9 +60,18 @@ void invertirRecursivo(int arr[], int tam, int i=0)
 }
 void bubblesort(int arr[], int tam)
 {
-    int &a=arr[0];
-    int &b=arr[tam-1];
-    swap(a,b);
+    int a,b;
+    for(a=0;a< tam-1;a++)
+    {
+        for(b=0;b < tam-a-1;b++){
+
+            if(arr[b]>arr[b+1]){
+
+            swap(arr[b],arr[b+1]);
+            }
+
+        }
+    }
 
 }
 int main()
