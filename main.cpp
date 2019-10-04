@@ -1,96 +1,91 @@
 #include <iostream>
-
 using namespace std;
-
-void imprimirArreglo(int arr[], int tam)
+void imprimirArreglo(int arr[],int tam)
 {
-    while(tam--)
+    for(int i=0;i<tam;i++)
     {
-        cout<< *arr << " ";
-        arr++;
+        cout<<arr[i]<<endl;
     }
-    cout << endl;
 }
-
-void sumarArreglo(int *arr, int tam)
+int sumarArreglo(int arr[],int tam)
 {
     int suma=0;
-    while(tam--)
+    for(int i=0;i<tam;i++)
     {
-        suma+=*arr;
-        arr++;
+        suma+=arr[i];
     }
-    cout << suma << endl;
+    return suma;
 }
-
-int sumarRecursivo(int *arr, int tam)
+int sumarRecursivo(int arr[], int tam)
 {
-    if(tam==0)
+    if(tam==1)
     {
-        return 0;
+        return arr[0];
     }
     else
     {
-        return *arr + sumarRecursivo(++arr, --tam);
+        return arr[tam-1]+sumarRecursivo(arr,tam-1);
     }
-    /*Segunda forma
-    if(tam==1)
-            return *arr;
-    return *arr + sumarRecursivo(arr+1,tam-1);
-    */
 }
-void swap(int *ptr1, int *ptr2)
+void invertir(int arr[], int tam)
 {
-    int tmp = *ptr1;
-    *ptr1 = *ptr2;
-    *ptr2 = tmp;
-
-}
-void invertir(int *arr, int tam)
-{
-    int *ptr;
-    ptr = arr+ tam-1;
-    for(int i=0;i< tam/2;i++)
+    int v = tam/2;
+    tam-=1;
+    for(int i=0;i<v;i++)
     {
-    swap(*arr, *ptr);
-    arr++;
-    ptr--;
+        int c = arr[i];
+        arr[i] = arr[tam];
+        arr[tam--] = c;
     }
-    cout<< *ptr << endl;
 }
-
-void invertirRecursivo(int *arr, int tam, int *ptr)
+void invertirRecursivo(int arr[], int tam, int i=0)
 {
-    ptr = arr+tam-1;
-    while(tam--)
+    if(tam<= i)
     {
-        swap(*arr,*ptr);
-        arr++;
-        ptr--;
-        return;
+      return;
     }
-    invertirRecursivo(arr++,tam, ptr--);
+    else
+    {
+        int x;
+        x =arr[i];
+        arr[i] = arr[tam-1];
+        arr[tam-1]= x;
+        invertirRecursivo(&arr[i+1], tam-1);
+    }
+}
+void bubblesort(int arr[], int tam)
+{
+    int &a=arr[0];
+    int &b=arr[tam-1];
+    swap(a,b);
+    for(a=0;a< tam-1;a++)
+    {
+        for(b=0;b < tam-a-1;b++){
+
+            if(arr[b]>arr[b+1]){
+
+            swap(arr[b],arr[b+1]);
+            }
+
+        }
+    }
 
 }
 int main()
 {
-
-    int x[5]={2,3,4,5,6};
-    int tam=5;
+    int x[5];
+    for(int i=0;i<5;i++)
+    {
+        cin>>x[i];
+    }
     /*
-    imprimirArreglo(x, tam);
-    sumarArreglo(x, tam)
-    cout << sumarRecursivo(x,tam);
-    int a=5;
-    int b=10;
-    int *ptr1 = &a;
-    int *ptr2 = &b;
-    swap(ptr1,ptr2);
-    cout << a << " " << b << endl;
-
-    invertir(x,tam);
-    imprimirArreglo(x, tam);
+    imprimirArreglo(x,5);
+    cout<< sumarArreglo(x,5)<< endl;
+    cout <<sumarRecursivo(x,5)<<endl;
+    invertir(x,5);
+    imprimirArreglo(x,5);
+    invertirRecursivo(x,5);
     */
-    invertirRecursivo(x,tam,0);
-    imprimirArreglo(x,tam);
+    bubblesort(x,5);
+    imprimirArreglo(x,5);
 }
